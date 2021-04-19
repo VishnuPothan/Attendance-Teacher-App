@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">Attendance Teacher App</string>
+    <string name="signIn">Sign In</string>
+    <string name="letsGetStarted">Let\'s Get Started</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="sentOtp">Sent OTP</string>
+    <string name="enterMobileNo">Enter Mobile Number</string>
+    <string name="verifyMobileNumber">Verify your mobile</string>
+    <string name="enterYourOtp">Enter your OTP code here</string>
+    <string name="OTPNotReceived">Didn\'t receive an OTP ?</string>
+    <string name="resendOTP">Resent OTP</string>
+    <string name="verifyOTP">Verify OTP</string>
+    <string name="home">Home</string>
+    <string name="message">Message</string>
+    <string name="profile">Profile</string>
+    <string name="attendance_view">Attendance View</string>
+    <string name="apply">Apply</string>
+    <string name="present">P</string>
+    <string name="date">Date</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="requests">Requests</string>
 </resources>
