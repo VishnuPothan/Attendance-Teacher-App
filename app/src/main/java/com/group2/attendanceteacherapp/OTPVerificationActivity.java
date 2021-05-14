@@ -25,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.group2.attendanceteacherapp.SharedPreference.SharedPreference;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -98,37 +100,30 @@ public class OTPVerificationActivity extends AppCompatActivity {
     }
 
     private void checkExistingUser() {
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
-        mDatabase.orderByChild("phone").equalTo(phoneNumberStr).addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("teacher");
+        mDatabase.orderByChild("phone").equalTo(phoneNumberStr.substring(3,13)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    Log.i("here", "Already a user..");
-                    Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
-                    SharedPreference.setUserVerified(getApplicationContext(), true);
-
                     //getting existing user details and store in shared preference
-                    mDatabase.child(Objects.requireNonNull(mAuth.getUid())).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.exists()) {
-                                String userName = Objects.requireNonNull(snapshot.child("userName").getValue()).toString();
-                                SharedPreference.setUserName(getApplicationContext(), userName);
-                            }
-                        }
+                    HashMap<String, String> hMap = (HashMap<String, String>) snapshot.getValue();
+                    String pair = String.valueOf(hMap.get(hMap.keySet().toArray()[0]));
+                    String[] pairs = pair.split(",");
+                    String userID = String.valueOf(hMap.keySet().toArray()[0]);
+                    String phoneStr = pairs[0].split("=")[1];
+                    String subjectStr = pairs[1].split("=")[1];
+                    String nameStr = pairs[2].split("=")[1];
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                    SharedPreference.setUserID(getApplicationContext(), userID);
+                    SharedPreference.setUserVerified(getApplicationContext(), true);
+                    SharedPreference.setUserName(getApplicationContext(), nameStr);
+                    SharedPreference.setUserPhone(getApplicationContext(), phoneStr);
+                    SharedPreference.setUserSubject(getApplicationContext(), subjectStr);
 
-                        }
-                    });
+                    Intent mainIntent = new Intent(getApplicationContext(), HomeActivity.class);
                     startActivity(mainIntent);
                 } else {
-                    Log.i("here", "New user...");
-                    SharedPreference.setUserVerified(getApplicationContext(), true);
-                    Intent createAccountIntent = new Intent(getApplicationContext(), MainActivity.class);
-                    createAccountIntent.putExtra("PhoneNumber", phoneNumberStr);
-                    startActivity(createAccountIntent);
+                    Toast.makeText(getApplicationContext(), "Your are not registered!!!", Toast.LENGTH_SHORT).show();
                 }
                 finish();
             }

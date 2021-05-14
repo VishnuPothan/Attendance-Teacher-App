@@ -36,7 +36,7 @@ public class SplashScreen extends AppCompatActivity {
 
         new Handler().postDelayed(() -> {
             if (SharedPreference.getUserVerified(getApplicationContext())){
-                Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent mainIntent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(mainIntent);
             }else {
                 Intent verifyIntent = new Intent(SplashScreen.this, LoginActivity.class);

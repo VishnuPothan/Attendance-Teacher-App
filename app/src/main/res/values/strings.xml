@@ -25,4 +25,18 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="requests">Requests</string>
+    <string name="name">Name</string>
+    <string name="select_date">Select Date</string>
+    <string name="sent_attendance_request">Sent Attendance Request</string>
+    <string name="time">Time</string>
+    <string name="attendance_mark">Attendance Mark</string>
+    <string name="enter_the_message">Enter the message</string>
+    <string name="teacher_name">Teacher Name</string>
+    <string name="submit">Submit</string>
+    <string name="subject_name">Subject Name</string>
+    <string name="approve">Approve</string>
+    <string name="cancel">Cancel</string>
+    <string name="editPersonalInfo">Edit Profile Information</string>
+    <string name="phone">Phone</string>
+    <string name="save">save</string>
 </resources>
